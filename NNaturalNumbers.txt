@@ -1,0 +1,75 @@
+package Assignment16;
+
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Stack;
+
+public class NNaturalNumbers 
+{
+    public static String checkOrder(Queue<Integer> queue) 
+    {
+        Stack<Integer> stack = new Stack<>();
+        Queue<Integer> resultQueue = new LinkedList<>();
+        int expectedElement = 1;
+        while (!queue.isEmpty()) 
+        {
+            int front = queue.peek();
+            if (front == expectedElement) 
+            {
+                resultQueue.add(front);
+                queue.remove();
+                expectedElement++;
+            } 
+            else 
+            {
+                if (stack.isEmpty() || stack.peek() > front) 
+                {
+                    stack.push(front);
+                    queue.remove();
+                }
+                else 
+                {
+                    return "No";
+                }
+            }
+        }
+        while (!stack.isEmpty()) 
+        {
+            int top = stack.peek();
+            if (top == expectedElement)
+            {
+                resultQueue.add(top);
+                stack.pop();
+                expectedElement++;
+            } 
+            else
+            {
+                return "No";
+            }
+        }
+        Queue<Integer> expectedQueue = new LinkedList<>();
+        for (int i = 1; i <= resultQueue.size(); i++) 
+        {
+            expectedQueue.add(i);
+        }
+        if (resultQueue.equals(expectedQueue)) 
+        {
+            return "Yes";
+        } else {
+            return "No";
+        }
+    }
+    public static void main(String[] args) 
+    {
+        Queue<Integer> queue = new LinkedList<>();
+        queue.add(5);
+        queue.add(1);
+        queue.add(2);
+        queue.add(6);
+        queue.add(3);
+        queue.add(4);
+        String result = checkOrder(queue);
+        System.out.println(result);
+    }
+}
+

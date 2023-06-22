@@ -1,0 +1,29 @@
+package Assignment16;
+
+import java.util.Stack;
+
+public class ReverseNumber 
+{
+    public static int reverseNumber(int number) 
+    {
+        String numberStr = String.valueOf(number);
+        Stack<Character> stack = new Stack<>();
+        for (int i = 0; i < numberStr.length(); i++) 
+        {
+            stack.push(numberStr.charAt(i));
+        }
+        StringBuilder reversedStr = new StringBuilder();
+        while (!stack.isEmpty()) 
+        {
+            reversedStr.append(stack.pop());
+        }
+        return Integer.parseInt(reversedStr.toString());
+    }
+    public static void main(String[] args) 
+    {
+        int number = 365;
+        int reversedNumber = reverseNumber(number);
+        System.out.println(reversedNumber);
+    }
+}
+

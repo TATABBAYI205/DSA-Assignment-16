@@ -1,0 +1,42 @@
+package Assignment16;
+
+import java.util.*;
+
+public class NearestElement 
+{
+    public static int[] findNearestGreaterFrequency(int[] arr) 
+    {
+        int n = arr.length;
+        int[] result = new int[n];
+        Map<Integer, Integer> frequencyMap = new HashMap<>();
+        Stack<Integer> stack = new Stack<>();
+        for (int i = 0; i < n; i++) {
+            frequencyMap.put(arr[i], frequencyMap.getOrDefault(arr[i], 0) + 1);
+        }
+        for (int i = n - 1; i >= 0; i--) 
+        {
+            while (!stack.isEmpty() && frequencyMap.get(arr[i]) >= frequencyMap.get(stack.peek())) 
+            {
+                stack.pop();
+            }
+            if (stack.isEmpty()) 
+            {
+                result[i] = -1;
+            } 
+            else 
+            {
+                result[i] = stack.peek();
+            }
+            stack.push(arr[i]);
+        }
+        return result;
+    }
+    public static void main(String[] args) 
+    {
+        int[] arr = {1,1,1,2,2,2,2,11,3,3};
+        int[] result = findNearestGreaterFrequency(arr);
+        System.out.println(Arrays.toString(result));
+    }
+}
+
+

@@ -1,0 +1,35 @@
+package Assignment16;
+
+import java.util.Stack;
+
+public class DeleteMiddleElement 
+{
+    public static void deleteMiddle(Stack<Integer> stack, int k) 
+    {
+        if (stack.isEmpty() || k == 0)
+        {
+            stack.pop();
+            return;
+        }
+        int temp = stack.pop();
+        deleteMiddle(stack, k - 1);
+        stack.push(temp);
+    }
+    public static void deleteMiddleElement(Stack<Integer> stack) 
+    {
+        int k = stack.size() / 2 ;
+        deleteMiddle(stack, k);
+    }
+    public static void main(String[] args) 
+    {
+        Stack<Integer> stack = new Stack<>();
+        stack.push(1);
+        stack.push(2);
+        stack.push(3);
+        stack.push(4);
+        stack.push(5);
+        deleteMiddleElement(stack);
+        System.out.println( stack);
+    }
+}
+

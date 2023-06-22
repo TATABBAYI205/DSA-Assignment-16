@@ -1,0 +1,30 @@
+package Assignment16;
+
+import java.util.Stack;
+
+public class SequenceOfNString 
+{
+    public static int countWordsLeft(String[] words) 
+    {
+        Stack<String> stack = new Stack<>();
+        for (String word : words) 
+        {
+            if (!stack.isEmpty() && stack.peek().equals(word)) 
+            {
+                stack.pop();
+            } 
+            else 
+            {
+                stack.push(word);
+            }
+        }
+        return stack.size();
+    }
+    public static void main(String[] args) 
+    {
+        String[] words = {"ab", "aa", "aa", "bcd", "ab"};
+        int remainingWords = countWordsLeft(words);
+        System.out.println(remainingWords);
+    }
+}
+
